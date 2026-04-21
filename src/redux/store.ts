@@ -1,7 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
+import newsReducer from './news/slice';
+import friendsReducer from './friends/slice';
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    news: newsReducer,
+    friends: friendsReducer,
+  },
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
