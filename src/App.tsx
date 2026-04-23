@@ -1,3 +1,6 @@
+import { Suspense } from 'react'
+import { Route,Routes } from 'react-router-dom'
+
 
 import './App.css'
 
@@ -5,7 +8,11 @@ function App() {
 
   return (
     <>
-      <h1 className='text-5xl'>asdasdasda</h1>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path='/' element={<div>Home</div>} />
+        </Routes>
+      </Suspense>
     </>
   )
 }
