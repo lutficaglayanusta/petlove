@@ -1,7 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit'
-import newsReducer from './news/slice';
-import friendsReducer from './friends/slice';
-import authReducer from './auth/slice';
+import { configureStore } from "@reduxjs/toolkit";
 import {
   persistStore,
   persistReducer,
@@ -12,8 +9,15 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import storage from 'redux-persist/lib/storage';
+import newsReducer from './news/slice';
+import friendsReducer from './friends/slice';
+import authReducer from './auth/slice';
 
+const storage = {
+  getItem: (key: string) => Promise.resolve(localStorage.getItem(key)),
+  setItem: (key: string, value: string) => Promise.resolve(localStorage.setItem(key, value)),
+  removeItem: (key: string) => Promise.resolve(localStorage.removeItem(key)),
+};
 
 const authPersistConfig = {
   key: "auth",
@@ -35,7 +39,7 @@ export const store = configureStore({
     }),
 });
 
-export const persistor = persistStore(store);
+
 
 
 
@@ -43,3 +47,5 @@ export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch
+
+export const persistor = persistStore(store);

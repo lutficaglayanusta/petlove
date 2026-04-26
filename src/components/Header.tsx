@@ -3,6 +3,7 @@ import Nav from "./Nav"
 import UserNav from "./UserNav"
 import AuthNav from "./AuthNav"
 import { selectAuthenticated } from "../redux/auth/selector"
+import logo from '../assets/img/logo.jpg'
 
 
 const Header = () => {
@@ -11,6 +12,8 @@ const Header = () => {
 
   return (
     <header>
+    
+          <img src={logo} alt="Logo" />
           <Nav />
           {
               isAuthenticated ? <UserNav /> : <AuthNav />

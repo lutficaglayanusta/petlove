@@ -8,5 +8,9 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
-  
+  resolve: {
+    alias: {
+      'redux-persist/lib/storage': 'redux-persist/lib/storage/index.js'
+    }
+  }
 })
