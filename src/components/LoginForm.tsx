@@ -33,14 +33,19 @@ const LoginForm = (): JSX.Element => {
          onSubmit={handleSubmit}
          validationSchema={LoginSchema}
        >
-         <Form>
-           <label htmlFor="email">Email</label>
-          <Field id="email" name="email" placeholder="Email" />
+         <Form className="flex flex-col gap-4">
+           
+          <Field className="p-4 border-[1px] border-gray-300 border-solid rounded-3xl" id="email" name="email" placeholder="Email" />
           
-           <label htmlFor="password">Password</label>
-          <Field id="password" name="password" type="password" placeholder="Password" />
+           
+          <Field className="mb-4 p-4 border-[1px] border-gray-300 border-solid rounded-3xl" id="password" name="password" type="password" placeholder="Password" />
           
-           <button type="submit">Submit</button>
+           <button type="submit" className="bg-[#F6B83D] text-white p-4 rounded-3xl">
+             Log In
+          </button>
+          <p className="text-center mt-2">
+            Don't have an account? <a href="/register" className="text-[#F6B83D]">Register here</a>
+          </p>
          </Form>
        </Formik>
     </>

@@ -1,16 +1,16 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const AuthNav = () => {
   return (
-    <ul>
-          <li>
-              <Link to="/login">Login</Link>
+    <ul className="flex gap-[10px]">
+      <li>
+        <Link className="px-[35px] py-[15px] bg-[#F6B83D] text-white rounded-3xl " to="/login">Login</Link>
       </li>
       <li>
-          <Link to="/register">Registration</Link>
+        <Link className="px-[35px] py-[15px] bg-[#FFF4DF] text-[#F6B83D] rounded-3xl " to="/register">Registration</Link>
       </li>
     </ul>
-  )
-}
+  );
+};
 
-export default AuthNav
+export default AuthNav;
