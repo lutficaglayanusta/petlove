@@ -12,6 +12,7 @@ import {
 import newsReducer from './news/slice';
 import friendsReducer from './friends/slice';
 import authReducer from './auth/slice';
+import citiesReducer from './cities/slice';
 
 const storage = {
   getItem: (key: string) => Promise.resolve(localStorage.getItem(key)),
@@ -30,6 +31,7 @@ export const store = configureStore({
     auth: persistReducer(authPersistConfig, authReducer) as unknown as typeof authReducer,
     news: newsReducer,
     friends: friendsReducer,
+    cities: citiesReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
