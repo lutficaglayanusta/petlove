@@ -6,7 +6,6 @@ type Days = {
     _id: string;
     isOpen: boolean;
 }
-
 interface Friend {
     _id: string;
     title: string;
