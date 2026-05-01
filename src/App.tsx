@@ -13,6 +13,7 @@ const LoginPage = lazy(() => import("./pages/LoginPage"));
 const RegisterPage = lazy(() => import("./pages/RegistrationPage"));
 const NewsPage = lazy(() => import("./pages/NewsPage"));
 const FriendsPage = lazy(() => import("./pages/FriendsPage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 function App() {
   const isRefreshing = useSelector(selectRefreshing);
@@ -46,6 +47,7 @@ function App() {
             element={<NewsPage />}
             />
             <Route path="/friends" element={<FriendsPage />} />
+            <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
     </>
