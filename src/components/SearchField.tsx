@@ -4,9 +4,10 @@ import type { JSX } from 'react';
 
 type SearchFieldProps = {
   onSearch: (keyword: string) => void;
+  placeholder?: string;
 }
 
-const SearchField = ({ onSearch }: SearchFieldProps): JSX.Element => {
+const SearchField = ({ onSearch, placeholder = "Search..." }: SearchFieldProps): JSX.Element => {
   const [searchValue, setSearchValue] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +25,7 @@ const SearchField = ({ onSearch }: SearchFieldProps): JSX.Element => {
     <div className="relative mb-8">
       <input
         type="text"
-        placeholder="Search news..."
+        placeholder={placeholder}
         value={searchValue}
         onChange={handleChange}
         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-orange-400"

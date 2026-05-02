@@ -13,6 +13,7 @@ import newsReducer from './news/slice';
 import friendsReducer from './friends/slice';
 import authReducer from './auth/slice';
 import citiesReducer from './cities/slice';
+import noticesReducer from './notices/slice';   
 
 const storage = {
   getItem: (key: string) => Promise.resolve(localStorage.getItem(key)),
@@ -32,6 +33,7 @@ export const store = configureStore({
     news: newsReducer,
     friends: friendsReducer,
     cities: citiesReducer,
+    notices: noticesReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

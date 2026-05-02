@@ -6,7 +6,7 @@ import type {JSX} from "react";
 import SearchField from "../components/SearchField";
 import NewsList from "../components/NewsList";
 import Pagination from "../components/Pagination";
-import { selectNews, selectNewsPage, selectNewsTotalPages } from "../redux/news/selector";
+import { selectNewsPage, selectNewsTotalPages } from "../redux/news/selector";
 
 
 const NewsPage = (): JSX.Element => {

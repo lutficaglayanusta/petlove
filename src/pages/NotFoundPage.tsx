@@ -9,7 +9,7 @@ const NotFoundPage = (): JSX.Element => {
           <p className="text-white text-[24px] mt-4">
               Ooops! This page not found :
           </p>
-          <Link to="/" className="color-[#F6B83D] bg-[#FFF4DF] px-[30px] py-[14px] rounded-3xl inline-block mt-4">
+          <Link to="/" className="text-[#F6B83D] bg-[#FFF4DF] px-[30px] py-[14px] rounded-3xl inline-block mt-4">
                To Home Page
           </Link>
     </div>
