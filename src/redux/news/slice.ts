@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchAllNews, fetchNews } from "./operations";
+import { fetchNews } from "./operations";
 
 interface NewsItem {
   _id: string;
@@ -36,12 +36,6 @@ const newsSlice = createSlice({
         state.page = action.payload.page;
         state.perPage = action.payload.perPage;
       })
-      .addCase(fetchAllNews.fulfilled, (state, action) => {
-        state.items = action.payload.results;
-        state.totalPages = action.payload.totalPages;
-        state.page = action.payload.page;
-        state.perPage = action.payload.perPage;
-      });
   },
 });
 export default newsSlice.reducer;

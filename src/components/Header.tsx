@@ -3,7 +3,7 @@ import Nav from "./Nav";
 import UserNav from "./UserNav";
 import AuthNav from "./AuthNav";
 import { selectAuthenticated } from "../redux/auth/selector";
-import logo from "../assets/img/logo.jpg";
+import logo from "../assets/img/logo.png";
 import { Link } from "react-router";
 
 const Header = () => {

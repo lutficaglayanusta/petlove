@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const NotFoundPage = (): JSX.Element => {
   return (
-    <div className="bg-[#F6B83D] p-40.5 text-center">
+    <div className="bg-[#F6B83D] px-[155px] py-[80px] text-center rounded-[60px]">
           <img className="block mx-auto bg-[#F6B83D] rounded-3xl" src={image} alt="Not Found" />
           <p className="text-white text-[24px] mt-4">
               Ooops! This page not found :

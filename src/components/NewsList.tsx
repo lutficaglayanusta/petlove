@@ -10,7 +10,7 @@ const NewsList = () => {
     console.log(news);
 
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className="flex flex-wrap gap-5">
           {
             news.map((item) => (
               <NewsItem key={item._id} item={item} />
