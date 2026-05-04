@@ -1,26 +1,24 @@
 import { useState, type JSX } from "react";
 import { selectUser } from "../redux/users/selector";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import ProfileNoticeItem from "./ProfileNoticeItem";
 import { Link } from "react-router-dom";
-import { deletePet } from "../redux/users/operation";
-import type { AppDispatch } from "../redux/store";
 import ModalEditUser from "./ModalEditUser";
 import Modal from "react-modal";
+import PetsList from "./PetsList";
 
 const customStyles = {
   content: {
     top: '50%',
     left: '50%',
-    
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     borderRadius: '24px',
-    padding: '2rem',
     width: '90%',
     maxWidth: '500px',
     maxHeight: '90vh',
     height: '100%',
+    overflow:"hidden"
   },
   overlay: {
     backgroundColor: 'rgba(0,0,0,0.4)',
@@ -29,13 +27,9 @@ const customStyles = {
 
 const UserCard = (): JSX.Element => {
   const user = useSelector(selectUser);
-  const dispatch = useDispatch<AppDispatch>();
   const [activeTab, setActiveTab] = useState<"favorites" | "viewed">(
     "favorites",
   );
-  const handleDeletePet = (petId: string) => {
-    dispatch(deletePet(petId));
-  }
    const [modalIsOpen, setIsOpen] = useState(false);
 
   function openModal() {
@@ -49,7 +43,7 @@ const UserCard = (): JSX.Element => {
 
   return (
     <div className="flex gap-2 p-4 max-w-6xl mx-auto">
-      <div className="bg-white rounded-2xl border border-gray-100 w-[55%] p-6">
+      <div className="bg-white rounded-2xl border border-gray-100 w-[55%] p-6 h-[100%]">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2 bg-[#F6B83D] text-white text-sm font-medium px-4 py-1.5 rounded-full">
             User
@@ -97,28 +91,9 @@ const UserCard = (): JSX.Element => {
           </Link>
         </div>
 
-        {user.pets.map((pet) => (
-          <div
-            key={pet._id}
-            className="flex items-center gap-3 mt-3 border border-gray-100 rounded-xl p-3"
-          >
-            <img
-              src={pet.imgURL}
-              alt={pet.name}
-              className="w-12 h-12 rounded-xl object-cover"
-            />
-            <div>
-              <p className="text-sm font-medium">{pet.name}</p>
-              <p className="text-xs text-gray-400">{pet.species}</p>
-            </div>
-            <button
-              onClick={() => handleDeletePet(pet._id)}
-              className="bg-red-100 text-red-500 hover:bg-red-200 px-4 py-2 rounded-3xl"
-            >
-              Delete
-            </button>
-          </div>
-        ))}
+        
+        <PetsList/>
+
 
         <button className="mt-6 bg-[#FAEEDA] text-[#F6B83D] font-medium px-7 py-3 rounded-3xl">
           LOG OUT
@@ -148,25 +123,13 @@ const UserCard = (): JSX.Element => {
             ))}
         </div>
 
-        {activeTab === "viewed" &&
+        <div className="flex flex-wrap gap-6">
+          {activeTab === "viewed" &&
           user.noticesViewed.map((notice) => (
-            <div
-              key={notice._id}
-              className="flex items-center gap-3 border border-gray-100 rounded-xl p-3 mb-2"
-            >
-              <img
-                src={notice.imgURL}
-                alt={notice.name}
-                className="w-14 h-14 rounded-xl object-cover"
-              />
-              <div>
-                <p className="text-sm font-medium">{notice.title}</p>
-                <p className="text-xs text-gray-400">
-                  {notice.name} · {notice.species} · {notice.category}
-                </p>
-              </div>
-            </div>
+            <ProfileNoticeItem key={notice._id} item={notice} />
           ))}
+        </div>
+        
       </div>
       <Modal isOpen={modalIsOpen}
         

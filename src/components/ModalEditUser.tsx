@@ -63,8 +63,8 @@ const ModalEditUser = ({ onClose }: Props) => {
   }
 
   return (
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-      <div className="bg-white rounded-3xl p-8 w-full max-w-md relative">
+    <div>
+      <div className="bg-white rounded-3xl p-8 w-full relative">
         
         <button onClick={onClose} className="absolute top-5 right-5 text-gray-400 hover:text-gray-600 text-xl">✕</button>
         

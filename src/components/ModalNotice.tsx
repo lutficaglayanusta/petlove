@@ -2,6 +2,7 @@ import type { JSX } from "react";
 import { useDispatch } from "react-redux";
 import type { AppDispatch } from "../redux/store";
 import { addNoticeToFavorites } from "../redux/notices/operation";
+import { CiHeart } from "react-icons/ci";
 
 type NoticesItemProps = {
   item: {
@@ -38,14 +39,14 @@ const ModalNotice = ({ item, onClose }: NoticesItemProps): JSX.Element => {
 
 
   return (
-    <div>
-      <img className="w-[150px] rounded-full" src={item.imgURL} alt={item.name} />
-      <p>{item.name}</p>
-      <div>
+    <div className="p-5 text-center">
+      <img className="w-[150px] rounded-full block mx-auto mb-[16px]" src={item.imgURL} alt={item.name} />
+      <p className="text-center">{item.name}</p>
+      <div className="flex items-center gap-2 my-3 justify-center">
         <img src="../../star.svg" alt="star" />
         <p>{item.popularity}</p>
           </div>
-          <div className="flex items-center gap-3 text-sm mb-3">
+          <div className="flex items-center justify-center gap-3 text-sm mb-[16px]">
           <div>
             <p className="text-gray-600 text-xs">Name</p>
             <p className="font-semibold truncate">{item.name}</p>
@@ -67,16 +68,21 @@ const ModalNotice = ({ item, onClose }: NoticesItemProps): JSX.Element => {
             <p className="font-semibold">{item.category}</p>
           </div>
         </div>
-          <p>
+          <p className="mb-[32px] w-[80%] mx-auto text-center">
               {item.comment}
-          </p>
-          <button onClick={onClose} className="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
-            X
+      </p>
+      {
+        item.price && (
+          <p className="my-3 font-bold text-lg text-center">${item.price}</p>
+        )
+      }
+          <button onClick={onClose} className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 cursor-pointer">
+            <img src="../../x.svg" alt="" />
           </button>
-          <button onClick={()=> addToFavorites(item._id)} className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
-            Add To Favorites
+          <button onClick={()=> addToFavorites(item._id)} className="gap-2 bg-[#F6B83D] text-white py-[14px] px-[42px] rounded-3xl mr-2">
+            Add To <CiHeart className="inline-block text-[30px]" />
           </button>
-          <button className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
+          <button className="bg-[#FFF4DF] text-[#F6B83D] py-[14px] px-[42px] rounded-3xl">
             Contact
           </button>
     </div>

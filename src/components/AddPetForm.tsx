@@ -60,7 +60,7 @@ const AddPetForm = () => {
   }
 
   return (
-    <div className="bg-white rounded-3xl p-8 max-w-lg mx-auto">
+    <div className="bg-white rounded-3xl p-8 max-w-lg mx-auto w-[100%]">
       <h2 className="text-2xl font-bold mb-6">
         Add my pet / <span className="text-gray-400 font-normal text-lg">Personal details</span>
       </h2>

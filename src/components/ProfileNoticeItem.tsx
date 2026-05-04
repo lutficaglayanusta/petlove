@@ -1,4 +1,7 @@
 import type { JSX } from "react";
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "../redux/store";
+import { removeNoticeFromFavorites } from "../redux/notices/operation";
 
 type ProfileNoticeItemProps = {
   item: {
@@ -18,11 +21,21 @@ type ProfileNoticeItemProps = {
 };
 
 const ProfileNoticeItem = ({ item }: ProfileNoticeItemProps): JSX.Element => {
+
+  const dispatch = useDispatch<AppDispatch>();
+
   const birthDate = new Date(item.birthday).toLocaleDateString("en-US", {
     year: "numeric",
     month: "numeric",
     day: "numeric",
   });
+  
+
+  const handleDeleteFavorite = (noticeId: string) => {
+    dispatch(removeNoticeFromFavorites(noticeId));
+  };
+
+
   return (
     <div className="bg-white p-3 rounded-xl">
       <img
@@ -57,8 +70,8 @@ const ProfileNoticeItem = ({ item }: ProfileNoticeItemProps): JSX.Element => {
 
       {item.price && <p className="text-[18px] font-medium">${item.price}</p>}
       <div className="flex items-center justify-between gap-2">
-              <button className="bg-[#F6B83D] px-6 py-2 rounded-3xl text-white mt-[12px] w-[90%]">Learn More</button>
-              <img className="bg-[#FFF4DF] p-3 rounded-full" src="../../public/trash-2.svg" alt="" />
+              <button className="bg-[#F6B83D] px-6 py-2 rounded-3xl text-white mt-[12px] w-[90%] cursor-pointer">Learn More</button>
+              <img onClick={()=> handleDeleteFavorite(item._id)} className="bg-[#FFF4DF] p-3 rounded-full cursor-pointer" src="../../public/trash-2.svg" alt="" />
       </div>
     </div>
   );

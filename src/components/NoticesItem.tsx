@@ -1,6 +1,10 @@
 import { useState, type JSX } from "react";
 import Modal from "react-modal";
 import ModalNotice from "./ModalNotice";
+import { CiHeart } from "react-icons/ci";
+import { FaHeart } from "react-icons/fa";
+import { selectNoticesFavorites } from "../redux/users/selector";
+import { useSelector } from "react-redux";
 
 const customStyles = {
   content: {
@@ -10,6 +14,7 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    borderRadius: '30px',
   },
 };
 
@@ -31,6 +36,8 @@ type NoticesItemProps = {
 };
 
 const NoticesItem = ({ item }: NoticesItemProps): JSX.Element => {
+
+  const userFavorites = useSelector(selectNoticesFavorites);
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -108,7 +115,11 @@ const NoticesItem = ({ item }: NoticesItemProps): JSX.Element => {
             Learn more
           </button>
           <button className=" bg-[#FFF4DF] rounded-full p-2 hover:bg-gray-100">
-            <span className="text-2xl">❤️</span>
+            {userFavorites?.some(fav => fav._id === item._id) ? (
+              <FaHeart className="text-2xl text-[#F6B83D]" />
+            ) : (
+              <CiHeart className="text-2xl" />
+            )}
           </button>
         </div>
       </div>

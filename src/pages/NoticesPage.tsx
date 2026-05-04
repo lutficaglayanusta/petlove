@@ -8,6 +8,7 @@ import { selectNoticesTotalPages } from "../redux/notices/selector";
 import NoticesFilters from "../components/NoticesFilters";
 import NoticesList from "../components/NoticesList";
 import Pagination from "../components/Pagination";
+import { fetchUserInfo } from "../redux/users/operation";
 
 const NoticesPage = (): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
@@ -30,6 +31,10 @@ const NoticesPage = (): JSX.Element => {
     dispatch(fetchNoticesSpecies());
     dispatch(fetchAllCities());
   }, [dispatch]);
+  
+  useEffect(() => {
+    dispatch(fetchUserInfo());
+  },[dispatch])
 
   // Fetch notices when filters or page changes
   useEffect(() => {
