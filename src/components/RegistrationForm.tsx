@@ -1,5 +1,5 @@
 import { type JSX } from 'react'
-import { Formik, Form, Field } from "formik"
+import { Formik, Form, Field,ErrorMessage } from "formik"
 import * as Yup from 'yup';
 import type { AppDispatch } from '../redux/store';
 import { useDispatch } from 'react-redux';
@@ -25,6 +25,7 @@ const RegistrationForm = (): JSX.Element => {
 
 
   const handleSubmit = (values: MyFormValues): void => {
+    console.log("asdasdasdsadasdsadasdsadasdasd")
     console.log(values);
     dispatch(register(values));
   }
@@ -39,12 +40,15 @@ const RegistrationForm = (): JSX.Element => {
          <Form className="flex flex-col gap-4">
            
           <Field className="p-4 border-[1px] border-gray-300 border-solid rounded-3xl" id="name" name="name" placeholder="Name" />
+          <ErrorMessage name="name" component="span" className="text-red-500 text-sm" />
           
            
           <Field className="p-4 border-[1px] border-gray-300 border-solid rounded-3xl" id="email" name="email" placeholder="Email" />
-          
+          <ErrorMessage name="email" component="span" className="text-red-500 text-sm" />
            
+
           <Field className=" p-4 border-[1px] border-gray-300 border-solid rounded-3xl" id="password" name="password" type="password" placeholder="Password" />
+          <ErrorMessage name="password" component="span" className="text-red-500 text-sm" />
 
           {/* <Field className="mb-4 p-4 border-[1px] border-gray-300 border-solid rounded-3xl" id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm Password" /> */}
           

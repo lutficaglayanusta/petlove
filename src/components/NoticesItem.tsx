@@ -1,4 +1,17 @@
-import type { JSX } from "react";
+import { useState, type JSX } from "react";
+import Modal from "react-modal";
+import ModalNotice from "./ModalNotice";
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
 
 type NoticesItemProps = {
   item: {
@@ -18,6 +31,18 @@ type NoticesItemProps = {
 };
 
 const NoticesItem = ({ item }: NoticesItemProps): JSX.Element => {
+
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
   const birthDate = new Date(item.birthday).toLocaleDateString("en-US", {
     year: "numeric",
     month: "numeric",
@@ -27,7 +52,7 @@ const NoticesItem = ({ item }: NoticesItemProps): JSX.Element => {
   return (
     <div className="bg-white rounded-lg p-5 overflow-hidden shadow-md hover:shadow-lg transition-shadow">
       
-        <img
+      <img 
           src={item.imgURL}
           alt={item.name}
           className="rounded-xl"
@@ -79,7 +104,7 @@ const NoticesItem = ({ item }: NoticesItemProps): JSX.Element => {
           )}
         <div className="flex justify-between items-center gap-3">
           
-          <button className="bg-amber-400 hover:bg-amber-500 text-white px-6 py-2 rounded-full font-semibold transition-colors w-[95%]">
+          <button onClick={openModal} className="bg-amber-400 hover:bg-amber-500 text-white px-6 py-2 rounded-full font-semibold transition-colors w-[95%]">
             Learn more
           </button>
           <button className=" bg-[#FFF4DF] rounded-full p-2 hover:bg-gray-100">
@@ -87,7 +112,17 @@ const NoticesItem = ({ item }: NoticesItemProps): JSX.Element => {
           </button>
         </div>
       </div>
+      <Modal
+        isOpen={modalIsOpen}
+        
+        onRequestClose={closeModal}
+        style={customStyles}
+        
+      >
+        <ModalNotice item={item} onClose={closeModal} />
+      </Modal>
     </div>
+    
   );
 };
 

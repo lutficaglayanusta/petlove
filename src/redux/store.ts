@@ -14,6 +14,7 @@ import friendsReducer from './friends/slice';
 import authReducer from './auth/slice';
 import citiesReducer from './cities/slice';
 import noticesReducer from './notices/slice';   
+import usersReducer from './users/slice';
 
 const storage = {
   getItem: (key: string) => Promise.resolve(localStorage.getItem(key)),
@@ -27,13 +28,20 @@ const authPersistConfig = {
   whitelist: ["token"],
 };
 
+const noticesPersistConfig = {
+  key: "notices",
+  storage,
+  whitelist: ["favorites"],
+};
+
 export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer) as unknown as typeof authReducer,
     news: newsReducer,
     friends: friendsReducer,
     cities: citiesReducer,
-    notices: noticesReducer,
+    notices: persistReducer(noticesPersistConfig, noticesReducer) as unknown as typeof noticesReducer,
+    users: usersReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

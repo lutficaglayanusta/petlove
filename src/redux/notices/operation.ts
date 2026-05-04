@@ -82,3 +82,26 @@ export const fetchNoticesSpecies = createAsyncThunk(
         }
     }
 );
+export const addNoticeToFavorites = createAsyncThunk(
+    "notices/addNoticeToFavorites",
+    async (noticeId: string, thunkAPI) => {
+        try {
+            await axios.post(`/notices/favorites/add/${noticeId}`);
+            const response = await axios.get(`/notices/${noticeId}`);
+            return response.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+        }
+    }
+);
+export const removeNoticeFromFavorites = createAsyncThunk(
+    "notices/removeNoticeFromFavorites",
+    async (noticeId: string, thunkAPI) => {
+        try {
+            await axios.delete(`/notices/favorites/remove/${noticeId}`);
+            return noticeId;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+        }
+    }
+);

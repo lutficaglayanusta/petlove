@@ -5,17 +5,17 @@ import { useSelector } from 'react-redux'
 import type {JSX} from "react"
 
 type RestrictedRouteProps = {
-    component: React.ComponentType,
+    component: JSX.Element,
     redirectTo?: string
 }
 
-const RestrictedRoute = ({ component: Component, redirectTo = "/" }:RestrictedRouteProps): JSX.Element => {
+const RestrictedRoute = ({ component, redirectTo = "/" }:RestrictedRouteProps): JSX.Element => {
     
     const isAuthenticated = useSelector(selectAuthenticated)
 
 
   return (
-    isAuthenticated ? <Navigate to={redirectTo} /> : <Component />
+    isAuthenticated ? <Navigate to={redirectTo} /> : component
   )
 }
 

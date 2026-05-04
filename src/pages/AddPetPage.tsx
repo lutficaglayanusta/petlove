@@ -1,9 +1,12 @@
-import React from 'react'
+import { type JSX } from "react"
+import logo from "../assets/img/dog1.png"
+import AddPetForm from "../components/AddPetForm"
 
-const AddPetPage = () => {
+const AddPetPage = (): JSX.Element => {
   return (
-    <div>
-      
+    <div className="max-w-5xl mx-auto flex">
+      <img src={logo} alt="Dog" />
+      <AddPetForm />
     </div>
   )
 }

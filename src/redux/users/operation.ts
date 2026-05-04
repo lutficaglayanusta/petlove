@@ -49,3 +49,15 @@ export const addPet = createAsyncThunk(
     }
   },
 );
+export const deletePet = createAsyncThunk(
+  "users/deletePet",
+  async (petId: string, thunkAPI) => { 
+    try {
+      const response = await axios.delete(`/users/current/pets/remove/${petId}`);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  },
+);
+
