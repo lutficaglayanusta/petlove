@@ -10,16 +10,18 @@ import {
 import { selectCities } from "../redux/cities/selector";
 import SearchField from "./SearchField";
 
+type FiltersType = {
+  keyword: string;
+  category: string;
+  sex: string;
+  species: string;
+  sort: string;
+  locationId: number | null;
+};
+
 type NoticesFiltersProps = {
-  filters: {
-    keyword: string;
-    category: string;
-    sex: string;
-    species: string;
-    sort: string;
-    locationId: number | null;
-  };
-  onFilterChange: (filters: Partial<typeof filters>) => void;
+  filters: FiltersType;
+  onFilterChange: (filters: Partial<FiltersType>) => void;
   onReset: () => void;
 };
 

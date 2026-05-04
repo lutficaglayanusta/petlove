@@ -39,7 +39,7 @@ const AddPetForm = () => {
   const imgURL = watch("imgURL")
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files[0]
+    const file = e.target.files?.[0]
     if (!file) return
 
     const formData = new FormData()
@@ -134,7 +134,7 @@ const AddPetForm = () => {
               render={({ field }) => (
                 <DatePicker
                   selected={field.value ? new Date(field.value) : null}
-                  onChange={(date) => field.onChange(date ? date.toISOString().split("T")[0] : "")}
+                  onChange={(date: Date | null) => field.onChange(date ? date.toISOString().split("T")[0] : "")}
                   dateFormat="dd.MM.yyyy"
                   placeholderText="00.00.0000"
                   className="w-full px-4 py-3 border border-gray-200 rounded-3xl text-sm outline-none focus:border-[#F6B83D]"
