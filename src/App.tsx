@@ -4,7 +4,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import RestrictedRoute from "./components/RestrictedRoute";
 import Header from "./components/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { selectRefreshing } from "./redux/auth/selector";
+import { selectAuthenticated, selectRefreshing } from "./redux/auth/selector";
 import type { AppDispatch } from "./redux/store";
 import { refreshUser } from "./redux/auth/operations";
 import Modal from "react-modal";
@@ -25,11 +25,16 @@ const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 function App() {
   const isRefreshing = useSelector(selectRefreshing);
 
+  const isAuthenticated = useSelector(selectAuthenticated)
+
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    dispatch(refreshUser());
-  }, [dispatch]);
+    if (isAuthenticated) {
+      dispatch(refreshUser());
+    }
+    
+  }, [dispatch,isAuthenticated]);
 
   return isRefreshing ? (
     <div>Loading...</div>
