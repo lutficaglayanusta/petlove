@@ -1,8 +1,31 @@
-import type { JSX } from "react";
-import { useDispatch } from "react-redux";
+import { useState, type JSX } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch } from "../redux/store";
 import { addNoticeToFavorites } from "../redux/notices/operation";
 import { CiHeart } from "react-icons/ci";
+import { selectAuthenticated } from "../redux/auth/selector";
+import Modal from "react-modal";
+import ModalAttention from "./ModalAttention";
+import toast from "react-hot-toast";
+
+const isMobile = window.innerWidth < 768;
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    width:isMobile ? "95%" :"40%",
+    maxWidth: isMobile ? '90%' : 'none',
+    borderRadius: '30px',
+  },
+  overlay: {
+    backgroundColor: 'rgba(0,0,0,0.4)',
+  }
+};
 
 type NoticesItemProps = {
   item: {
@@ -25,6 +48,19 @@ type NoticesItemProps = {
 
 const ModalNotice = ({ item, onClose }: NoticesItemProps): JSX.Element => {
 
+  const [modalIsOpen, setIsOpen] = useState(false);
+  
+    function openModal() {
+      setIsOpen(true);
+    }
+  
+  
+    function closeModal() {
+      setIsOpen(false);
+    }
+
+  const isAuthenticated = useSelector(selectAuthenticated)
+
     const birthDate = new Date(item.birthday).toLocaleDateString("en-US", {
     year: "numeric",
     month: "numeric",
@@ -33,8 +69,24 @@ const ModalNotice = ({ item, onClose }: NoticesItemProps): JSX.Element => {
 
     const dispatch = useDispatch<AppDispatch>();
     
-    const addToFavorites = (noticeId: string) => {
-       dispatch(addNoticeToFavorites(noticeId));
+  const addToFavorites = (noticeId: string) => {
+    if (isAuthenticated) {
+      dispatch(addNoticeToFavorites(noticeId))
+        .unwrap()
+        .then(() => {
+          toast.success("Added to favorites",{duration:2000})
+        })
+        .catch((e) => {
+          if (e.status === 409) {
+            return toast.error("This product is already in your favorites",{duration:2000})
+          }
+        toast.error("Something went wrong",{duration:2000})
+      })
+      
+    } else {
+      openModal()
+    }
+    onClose()
     }
 
 
@@ -82,9 +134,15 @@ const ModalNotice = ({ item, onClose }: NoticesItemProps): JSX.Element => {
           <button onClick={()=> addToFavorites(item._id)} className="gap-2 bg-[#F6B83D] text-white py-[14px] px-[42px] rounded-3xl mr-2">
             Add To <CiHeart className="inline-block text-[30px]" />
           </button>
-          <button className="bg-[#FFF4DF] text-[#F6B83D] py-[14px] px-[42px] rounded-3xl">
+          <button className="bg-[#FFF4DF] text-[#F6B83D] py-[14px] px-[42px] rounded-3xl max-sm:mt-3">
             Contact
-          </button>
+      </button>
+      <Modal  isOpen={modalIsOpen}
+        
+        onRequestClose={closeModal}
+        style={customStyles}>
+        <ModalAttention onClose={closeModal} />
+      </Modal>
     </div>
   );
 };

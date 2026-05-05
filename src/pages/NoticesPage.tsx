@@ -9,8 +9,13 @@ import NoticesFilters from "../components/NoticesFilters";
 import NoticesList from "../components/NoticesList";
 import Pagination from "../components/Pagination";
 import { fetchUserInfo } from "../redux/users/operation";
+import { selectAuthenticated } from "../redux/auth/selector";
 
 const NoticesPage = (): JSX.Element => {
+
+
+  const isAuthenticated = useSelector(selectAuthenticated)
+
   const dispatch = useDispatch<AppDispatch>();
   const totalPages = useSelector(selectNoticesTotalPages);
 
@@ -33,8 +38,11 @@ const NoticesPage = (): JSX.Element => {
   }, [dispatch]);
   
   useEffect(() => {
-    dispatch(fetchUserInfo());
-  },[dispatch])
+    if (isAuthenticated) {
+      dispatch(fetchUserInfo());
+    }
+    
+  },[dispatch,isAuthenticated])
 
   // Fetch notices when filters or page changes
   useEffect(() => {

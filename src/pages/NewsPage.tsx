@@ -34,8 +34,8 @@ const NewsPage = (): JSX.Element => {
 
   return (
     <div className="max-w-5xl mx-auto">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-[54px] mb-[60px] font-bold">News</h1>
+      <div className="flex justify-between items-center mb-8 max-sm:flex-col">
+        <h1 className="text-[54px] mb-[60px] font-bold max-sm:mb-3">News</h1>
         <SearchField onSearch={handleSearch} />
       </div>
       

@@ -14,10 +14,10 @@ type NewsItemProps = {
 
 const NewsItem = ({ item }: NewsItemProps): JSX.Element => {
   return (
-    <div className="w-[30%]">
-      <img src={item.imgUrl} alt={item.title} className="w-[361px]" />
-      <h2 className="mb-[14px] mt-[28px] font-bold">{item.title}</h2>
-      <p className="">
+    <div className="w-full sm:w-[40%] md:w-[30%] ">
+      <img src={item.imgUrl} alt={item.title} className="w-[100%]" />
+      <h2 className="mb-[14px] mt-[28px] font-bold max-lg:w-[100%]">{item.title}</h2>
+      <p className=" max-lg:w-[100%] max-sm:w-[100%]">
         {item.text.length > 100
           ? item.text.substring(0, 100) + "..."
           : item.text}

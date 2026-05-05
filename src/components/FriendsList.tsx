@@ -5,7 +5,6 @@ import FriendsItem from "./FriendsItem";
 
 const FriendsList = (): JSX.Element => {
   const friends = useSelector(selectFriends);
-  console.log(friends);
 
   return (
     <div>

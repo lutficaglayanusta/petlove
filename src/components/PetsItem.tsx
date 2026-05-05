@@ -34,7 +34,7 @@ const PetsItem = ({ pet }: PetsItemProp): JSX.Element => {
       <img className="w-[90px] rounded-full" src={pet.imgURL} alt="" />
       <div className="">
         <h2 className="mb-[12px]">{pet.name}</h2>
-        <div className="flex items-center gap-6 mb-3 ">
+        <div className="flex items-center gap-6 mb-3 flex-wrap max-sm:gap-4 ">
           <div>
             <p className="text-[#262626] text-[10px]">Name</p>
             <p className="text-[12px] truncate">{pet.name}</p>

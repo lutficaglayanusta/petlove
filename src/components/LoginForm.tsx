@@ -1,9 +1,10 @@
 import type { JSX } from "react"
-import { Formik, Form, Field } from "formik"
+import { Formik, Form, Field,ErrorMessage } from "formik"
  import * as Yup from 'yup';
 import { useDispatch } from "react-redux";
 import { login } from "../redux/auth/operations";
 import type { AppDispatch } from "../redux/store";
+import toast from 'react-hot-toast';
 
  interface MyFormValues {
    email: string;
@@ -22,8 +23,17 @@ const LoginForm = (): JSX.Element => {
 
 
   const handleSubmit = (values: MyFormValues): void => {
-    console.log(values);
-    dispatch(login(values));
+    dispatch(login(values))
+      .unwrap()
+      .then(() => {
+        toast.success("Login successfully",{duration:2000});
+      })
+      .catch((error) => {
+        if (error.status === 401) {
+          return toast.error("Email or password invalid",{duration:2000})
+        }
+        toast.error("Something went wrong",{duration:2000})
+      });
   }
 
   return (
@@ -36,10 +46,12 @@ const LoginForm = (): JSX.Element => {
          <Form className="flex flex-col gap-4">
            
           <Field className="p-4 border-[1px] border-gray-300 border-solid rounded-3xl" id="email" name="email" placeholder="Email" />
+          <ErrorMessage name="email" component="span" className="text-red-500 text-sm" />
           
            
           <Field className="mb-4 p-4 border-[1px] border-gray-300 border-solid rounded-3xl" id="password" name="password" type="password" placeholder="Password" />
-          
+          <ErrorMessage name="password" component="span" className="text-red-500 text-sm" />
+
            <button type="submit" className="bg-[#F6B83D] text-white p-4 rounded-3xl">
              Log In
           </button>

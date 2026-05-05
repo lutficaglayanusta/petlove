@@ -42,8 +42,8 @@ const UserCard = (): JSX.Element => {
   }
 
   return (
-    <div className="flex gap-2 p-4 max-w-6xl mx-auto">
-      <div className="bg-white rounded-2xl border border-gray-100 w-[55%] p-6 h-[100%]">
+    <div className="flex gap-2 p-4 max-w-6xl mx-auto max-sm:flex-col">
+      <div className="bg-white rounded-2xl border border-gray-100 w-[55%] p-6 h-[100%] max-sm:w-[100%]">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2 bg-[#F6B83D] text-white text-sm font-medium px-4 py-1.5 rounded-full">
             User
@@ -116,7 +116,7 @@ const UserCard = (): JSX.Element => {
           </button>
         </div>
 
-        <div className="flex flex-wrap gap-6">
+        <div className="flex flex-wrap gap-6 ">
           {activeTab === "favorites" &&
             user.noticesFavorites.map((item) => (
               <ProfileNoticeItem key={item._id} item={item} />

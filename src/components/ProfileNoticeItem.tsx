@@ -37,14 +37,14 @@ const ProfileNoticeItem = ({ item }: ProfileNoticeItemProps): JSX.Element => {
 
 
   return (
-    <div className="bg-white p-3 rounded-xl">
+    <div className="bg-white p-3 rounded-xl max-sm:w-[100%] max-sm:text-center">
       <img
         src={item.imgURL}
         alt={item.name}
         className="w-[292px] rounded-xl mx-auto mb-3"
       />
       <h2 className="mb-2 text-[18px] font-semibold">{item.title}</h2>
-      <div className="flex items-center gap-3 mb-3">
+      <div className="flex items-center gap-3 mb-3 max-sm:justify-center">
         <div>
           <p className="text-[#262626] text-[10px]">Name</p>
           <p className="text-[12px] truncate">{item.name}</p>

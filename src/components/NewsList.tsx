@@ -7,10 +7,8 @@ const NewsList = () => {
 
     const news = useSelector(selectNews);
 
-    console.log(news);
-
   return (
-    <div className="flex flex-wrap gap-5">
+    <div className="flex flex-wrap gap-5 max-sm:flex-col">
           {
             news.map((item) => (
               <NewsItem key={item._id} item={item} />

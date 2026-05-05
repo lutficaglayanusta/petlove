@@ -6,6 +6,8 @@ import { FaHeart } from "react-icons/fa";
 import { selectNoticesFavorites } from "../redux/users/selector";
 import { useSelector } from "react-redux";
 
+const isMobile = window.innerWidth < 768;
+
 const customStyles = {
   content: {
     top: '50%',
@@ -14,8 +16,12 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    maxWidth: isMobile ? '90%' : 'none',
     borderRadius: '30px',
   },
+  overlay: {
+    backgroundColor: 'rgba(0,0,0,0.4)',
+  }
 };
 
 type NoticesItemProps = {
@@ -36,6 +42,8 @@ type NoticesItemProps = {
 };
 
 const NoticesItem = ({ item }: NoticesItemProps): JSX.Element => {
+
+  
 
   const userFavorites = useSelector(selectNoticesFavorites);
 

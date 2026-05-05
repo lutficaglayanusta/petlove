@@ -8,6 +8,7 @@ import { selectRefreshing } from "./redux/auth/selector";
 import type { AppDispatch } from "./redux/store";
 import { refreshUser } from "./redux/auth/operations";
 import Modal from "react-modal";
+import { Toaster } from "react-hot-toast";
 
 Modal.setAppElement("#root");
 
@@ -58,11 +59,17 @@ function App() {
             element={
               <PrivateRoute redirectTo="/login" component={ProfilePage} />
             }
-            />
-            <Route path="/add-pet" element={<PrivateRoute redirectTo="/login" component={AddPetPage} />} />
+          />
+          <Route
+            path="/add-pet"
+            element={
+              <PrivateRoute redirectTo="/login" component={AddPetPage} />
+            }
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
+      <Toaster position="top-right" />
     </>
   );
 }

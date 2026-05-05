@@ -18,7 +18,7 @@ type Friend = {
 
 const FriendsItem = ({ item }: { item: Friend }): JSX.Element => {
   return (
-    <div className="flex gap-5 items-center bg-white p-3  rounded-lg">
+    <div className="flex gap-5 items-center bg-white p-3  rounded-lg ">
       <img className="w-[90px]" src={item.imageUrl} alt={item.title} />
       <div>
         <h2>{item.title}</h2>

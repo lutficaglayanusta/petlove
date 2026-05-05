@@ -4,7 +4,7 @@ import AddPetForm from "../components/AddPetForm"
 
 const AddPetPage = (): JSX.Element => {
   return (
-    <div className="max-w-5xl mx-auto flex gap-6">
+    <div className="max-w-5xl mx-auto flex gap-6 max-sm:flex-col max-lg:flex-col">
       <img src={logo} alt="Dog" />
       <AddPetForm />
     </div>

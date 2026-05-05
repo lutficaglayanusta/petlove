@@ -42,7 +42,7 @@ const UserNav = (): JSX.Element => {
 
   return (
     <>
-      <ul className="flex gap-3 items-center">
+      <ul className="flex gap-3 items-center max-sm:flex-col">
         <li>
           <button
             className="bg-[#F6B83D] py-[15px] px-[35px] text-white rounded-3xl cursor-pointer"

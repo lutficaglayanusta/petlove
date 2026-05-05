@@ -7,6 +7,7 @@ import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import type { AppDispatch } from "../redux/store"
 import { addPet } from "../redux/users/operation"
+import toast from "react-hot-toast"
 
 const schema = Yup.object({
   title: Yup.string().required("Title is required"),
@@ -56,6 +57,12 @@ const AddPetForm = () => {
 
   const onSubmit = async (values: FormValues) => {
     await dispatch(addPet(values))
+      .unwrap()
+      .then(() => {
+        toast.success("Added successfully",{duration:2000})
+      }).catch(() => {
+      toast.error("Something went wrong",{duration:2000})
+    })
     navigate("/profile")
   }
 
